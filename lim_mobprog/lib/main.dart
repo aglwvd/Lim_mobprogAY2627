@@ -1,16 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'screens/home_screen.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const FacebookApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class FacebookApp extends StatelessWidget {
+  const FacebookApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello, Aljohn Lim'))),
+    return ScreenUtilInit(
+      designSize: const Size(412, 715),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Facebook Replication',
+          initialRoute: '/home',
+          routes: {
+            '/home': (context) => const HomeScreen(),
+            '/newsfeed': (context) =>
+                const Scaffold(
+                  body: NewsFeedScreenPlaceholder(),
+                ),
+          },
+        );
+      },
     );
+  }
+}
+
+class NewsFeedScreenPlaceholder extends StatelessWidget {
+  const NewsFeedScreenPlaceholder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const HomeScreen();
   }
 }
